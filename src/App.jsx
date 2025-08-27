@@ -231,7 +231,7 @@ export default function App() {
           src="./wedding_clippart.jpg"
           alt="wedding clippart"
           style={{
-            width: 400,
+            width: 300,
             maxWidth: "100%",
             margin: "0px auto 40px auto",
             display: "block",

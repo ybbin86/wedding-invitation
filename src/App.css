@@ -257,7 +257,7 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
 .calendar-table {
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 6px;
+  border-spacing: 0 4px;
   background: transparent;
 }
 .calendar-table th {

@@ -14,16 +14,32 @@ const GALLERY_IMAGES = [
 
 export default function Gallery() {
   const [currentImage, setCurrentImage] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [slideDirection, setSlideDirection] = useState("");
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
   const isDragging = useRef(false);
 
   const nextImage = () => {
-    setCurrentImage((prev) => (prev + 1) % GALLERY_IMAGES.length);
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setSlideDirection("left");
+    setTimeout(() => {
+      setCurrentImage((prev) => (prev + 1) % GALLERY_IMAGES.length);
+      setSlideDirection("");
+      setIsAnimating(false);
+    }, 150);
   };
 
   const prevImage = () => {
-    setCurrentImage((prev) => (prev - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length);
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setSlideDirection("right");
+    setTimeout(() => {
+      setCurrentImage((prev) => (prev - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length);
+      setSlideDirection("");
+      setIsAnimating(false);
+    }, 150);
   };
 
   // 터치 시작
@@ -95,7 +111,9 @@ export default function Gallery() {
           minWidth: 375, 
           margin: "0 auto 12px auto",
           userSelect: "none", // 드래그 시 텍스트 선택 방지
-          cursor: "grab"
+          cursor: "grab",
+          overflow: "hidden", // 슬라이딩 애니메이션을 위해 추가
+          borderRadius: 18
         }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -114,58 +132,12 @@ export default function Gallery() {
             objectFit: "contain", 
             borderRadius: 18,
             display: "block",
-            pointerEvents: "none" // 이미지 드래그 방지
+            pointerEvents: "none", // 이미지 드래그 방지
+            transform: slideDirection === "left" ? "translateX(-100%)" : 
+                      slideDirection === "right" ? "translateX(100%)" : "translateX(0)",
+            transition: isAnimating ? "transform 0.3s ease-in-out" : "none"
           }}
         />
-        
-        {/* 이전/다음 버튼 */}
-        <button
-          onClick={prevImage}
-          style={{
-            position: "absolute",
-            left: "10px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            backgroundColor: "rgba(255,255,255,0.8)",
-            border: "none",
-            borderRadius: "50%",
-            width: "40px",
-            height: "40px",
-            cursor: "pointer",
-            fontSize: "18px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-            zIndex: 2
-          }}
-        >
-          ‹
-        </button>
-        
-        <button
-          onClick={nextImage}
-          style={{
-            position: "absolute",
-            right: "10px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            backgroundColor: "rgba(255,255,255,0.8)",
-            border: "none",
-            borderRadius: "50%",
-            width: "40px",
-            height: "40px",
-            cursor: "pointer",
-            fontSize: "18px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-            zIndex: 2
-          }}
-        >
-          ›
-        </button>
         
         {/* 이미지 카운터 */}
         <div style={{
@@ -184,7 +156,7 @@ export default function Gallery() {
         </div>
 
         {/* 스와이프 힌트 (첫 번째 이미지에서만 표시) */}
-        {currentImage === 0 && (
+        {/* {currentImage === 0 && (
           <div style={{
             position: "absolute",
             top: "20px",
@@ -200,7 +172,7 @@ export default function Gallery() {
           }}>
             ← 스와이프 →
           </div>
-        )}
+        )} */}
       </div>
       
       {/* 썸네일 */}
@@ -226,8 +198,9 @@ export default function Gallery() {
               objectFit: "cover", 
               borderRadius: 8, 
               cursor: "pointer",
-              border: currentImage === idx ? "2px solid #3a7cff" : "2px solid #eee",
+              border: "2px solid #eee",
               opacity: currentImage === idx ? 1 : 0.6,
+              transform: currentImage === idx ? "scale(1.05)" : "scale(1)",
               transition: "all 0.2s ease",
               flexShrink: 0
             }}
