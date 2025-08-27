@@ -1,0 +1,409 @@
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
+
+@font-face {
+    font-family: 'MaruBuri';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.ttf) format("truetype");
+}
+@font-face {
+    font-family: 'MaruBuriSemiBold';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.ttf) format("truetype");
+}
+@font-face {
+    font-family: 'MaruBuriBold';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.ttf) format("truetype");
+}
+@font-face {
+    font-family: 'MaruBuriLight';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.ttf) format("truetype");
+}
+@font-face {
+    font-family: 'MaruBuriExtraLight';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.eot);
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.ttf) format("truetype");
+}
+
+body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadeanim, .invite-fadeanim span {
+  font-family: 'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+
+.container-html {
+  /* min-height: 100vh; */
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px;
+  padding: 4px 0 40px 0;
+}
+
+.photo-card-html {
+  background: #fff;
+  border-radius: 24px;
+  /* box-shadow: 0 4px 24px rgba(0,0,0,0.10); */
+  box-shadow: none;
+  overflow: hidden;
+  width: 100%;
+  max-width: 600px;
+  min-width: 0;
+  box-sizing: border-box;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photo-card-html img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.handwriting-title-html {
+  width: 95vw;
+  max-width: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.handwriting-title-html svg {
+  width: 100%;
+  height: auto;
+  min-width: 200px;
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.handwriting-title-html text {
+  font-family: 'Yellowtail', cursive;
+  font-size: 100px;
+  fill: none;
+  stroke: #062ddd;
+  stroke-width: 2;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw 4s ease-in-out forwards;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15));
+  paint-order: stroke fill;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+#vara-container, #vara-container svg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  max-width: 100%;
+}
+
+.bgm-mute-btn {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1000;
+  background: rgba(255,255,255,0.95);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 8px 8px 24px rgba(0,0,0,0.18);
+  cursor: pointer;
+  transition: background 0.2s;
+  padding: 0;
+  line-height: 1;
+  outline: none !important;
+}
+.bgm-mute-btn:hover {
+  background: #e3e3e3;
+}
+.bgm-mute-btn:focus,
+.bgm-mute-btn:active {
+  outline: none !important;
+  box-shadow: 8px 8px 24px rgba(0,0,0,0.18) !important;
+  border: none !important;
+}
+
+.invite-fadeanim {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s cubic-bezier(0.4,0,0.2,1), transform 2s cubic-bezier(0.4,0,0.2,1);
+  font-size: 1.15rem;
+  color: #222;
+  font-family: inherit;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  text-align: left;
+  margin: 48px auto 0 auto;
+  width: 100%;
+  max-width: 600px;
+  min-width: 375px;
+  white-space: pre-line;
+}
+.invite-fadeanim.fadeinup {
+  opacity: 1;
+  transform: translateY(0);
+}
+.invite-fadeanim.fadeoutdown {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.ceremony-fadeanim {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s cubic-bezier(0.4,0,0.2,1), transform 2s cubic-bezier(0.4,0,0.2,1);
+}
+.ceremony-fadeanim.fadeinup {
+  opacity: 1;
+  transform: translateY(0);
+}
+.ceremony-fadeanim.fadeoutdown {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.gallery-fadeanim {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s cubic-bezier(0.4,0,0.2,1), transform 2s cubic-bezier(0.4,0,0.2,1);
+}
+.gallery-fadeanim.fadeinup {
+  opacity: 1;
+  transform: translateY(0);
+}
+.gallery-fadeanim.fadeoutdown {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.map-section-fadeanim {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s cubic-bezier(0.4,0,0.2,1), transform 2s cubic-bezier(0.4,0,0.2,1);
+}
+.map-section-fadeanim.fadeinup {
+  opacity: 1;
+  transform: translateY(0);
+}
+.map-section-fadeanim.fadeoutdown {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.container-html,
+.handwriting-title-html,
+.photo-card-html,
+.invite-fadeinup {
+  min-width: 375px;
+}
+
+.calendar-wrap {
+  width: 100%;
+  max-width: 600px;
+  min-width: 375px;
+  margin: 36px auto 0 auto;
+  display: flex;
+  justify-content: center;
+}
+.calendar-outer {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 18px;
+  /* box-shadow: 0 2px 12px rgba(0,0,0,0.06); */
+  padding: 20px 12px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.calendar-title {
+  font-family: 'MaruBuriBold', 'MaruBuri', sans-serif;
+  font-size: 1.15rem;
+  color: #062ddd;
+  margin-bottom: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.calendar-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 6px;
+  background: transparent;
+}
+.calendar-table th {
+  font-family: 'MaruBuriSemiBold', 'MaruBuri', sans-serif;
+  font-size: 1rem;
+  color: #888;
+  font-weight: 600;
+  padding: 0 0 4px 0;
+  text-align: center;
+}
+.calendar-table th:first-child {
+  color: #e74a3b;
+}
+.calendar-date, .calendar-circle {
+  font-family: 'MaruBuri', sans-serif;
+  font-size: 1.05rem;
+  color: #bbb;
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: none;
+  vertical-align: middle;
+  line-height: 36px;
+  margin: 0 auto;
+  transition: background 0.2s, color 0.2s;
+  box-sizing: border-box;
+  padding: 0;
+}
+.calendar-date.sunday, .calendar-circle.sunday {
+  color: #e74a3b;
+}
+.calendar-circle {
+  background: none;
+  color: #062ddd;
+  border: 3px solid #3a7cff;
+  font-weight: 700;
+  box-shadow: none;
+}
+.calendar-blank {
+  background: none;
+  width: 36px;
+  height: 36px;
+}
+
+.invite-divider {
+  border: none;
+  border-top: 1.5px solid #e0e0e0;
+  margin: 40px auto 40px auto;
+  width: 100%;
+  max-width: 340px;
+}
+.invite-names {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #222;
+  font-family: 'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.invite-parent {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #222;
+  letter-spacing: 0.01em;
+  margin-right: 2px;
+}
+.invite-mainname {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #222;
+  letter-spacing: 0.01em;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.ceremony-info {
+  text-align: center;
+  margin: 48px auto 0 auto;
+  font-family: 'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+}
+.ceremony-title {
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #554c44;
+  letter-spacing: 0.01em;
+}
+.ceremony-place {
+  font-size: 1.5rem;
+  margin-bottom: 2px;
+  color: #444;
+  font-weight: 500;
+}
+.ceremony-datetime {
+  font-size: 1.15rem;
+  color: #888;
+  font-weight: 400;
+}
+
+.gallery-wrap {
+  width: 100%;
+  max-width: 600px;
+  min-width: 375px;
+  margin: 0 auto 32px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.gallery-main-swiper {
+  width: 100%;
+  max-width: 600px;
+  min-width: 375px;
+  border-radius: 18px;
+  margin-bottom: 8px;
+}
+.gallery-thumbs-swiper {
+  width: 100%;
+  max-width: 600px;
+  min-width: 375px;
+  margin: 0 auto;
+  padding-bottom: 4px;
+}
+.gallery-thumbs-swiper .swiper-slide {
+  opacity: 0.6;
+  border: none;
+  transition: opacity 0.2s, border 0.2s;
+}
+.gallery-thumbs-swiper .swiper-slide-thumb-active {
+  opacity: 1;
+  border: 2px solid #3a7cff;
+}
+.swiper-button-next, .swiper-button-prev {
+  color: #888;
+  background: rgba(255,255,255,0.7);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  top: 50%;
+  transform: translateY(-50%);
+}
+.swiper-button-next:after, .swiper-button-prev:after {
+  font-size: 1.3rem;
+}
+
+@media (max-width: 700px) {
+  .container-html {
+    gap: 24px;
+    padding: 20px 0 32px 0;
+  }
+  .handwriting-title-html, .photo-card-html {
+    max-width: 98vw;
+    width: 98vw;
+  }
+}
