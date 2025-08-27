@@ -1,15 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/thumbs';
 import "./App.css";
 import Gallery from "./Gallery";
 
 const INVITE_TEXT = `함께 있기만 해도\n세상이 즐겁고 웃음이 멈추지 않는 두 사람,\n그 순간들이 너무 소중해서\n평생을 함께하기로 약속했습니다.\n\n저희의 첫 시작에 오셔서\n따뜻한 마음으로 자리를 빛내주세요.`;
 
 export default function App() {
-  // Swiper thumbs
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const varaRef = useRef(null);
   const audioRef = useRef(null);
   const [muted, setMuted] = useState(false);
