@@ -244,7 +244,7 @@ export default function App() {
           display: "inline-block",
           textAlign: "left",
           whiteSpace: "pre-line",
-          fontSize: "1.15rem",
+          fontSize: "0.92rem",
           color: "#222",
           fontFamily: "inherit",
           fontWeight: 400,
@@ -268,7 +268,7 @@ export default function App() {
             src="./wedding_clippart_middle.png"
             alt="wedding clippart"
             style={{
-              width: 250,
+              width: 200,
               maxWidth: "100%",
               margin: "60px auto 40px auto",
               display: "block",
@@ -312,7 +312,7 @@ export default function App() {
           }}
         />
         <div style={{
-          fontSize: "2rem",
+          fontSize: "1.6rem",
           fontWeight: 700,
           color: "#554c44",
           marginBottom: "40px",
@@ -349,7 +349,7 @@ export default function App() {
           }}
         />
         <div style={{
-          fontSize: "2rem",
+          fontSize: "1.6rem",
           fontWeight: 700,
           color: "#554c44",
           marginBottom: "10px",
@@ -373,7 +373,7 @@ export default function App() {
           flexWrap: "wrap"
         }}>
           <div style={{
-            fontSize: "1.1rem",
+            fontSize: "0.88rem",
             fontWeight: "600", 
             color: "#554c44",
             fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif",
@@ -384,7 +384,13 @@ export default function App() {
             </span>
           </div>
           <div
-            onClick={() => window.open('https://naver.me/Gctrli34', '_blank')}
+            onClick={(e) => {
+              window.open('https://naver.me/Gctrli34', '_blank');
+              // 클릭 후 호버 상태 리셋
+              e.target.style.transform = "translateY(0)";
+              e.target.style.boxShadow = "none";
+              e.target.blur(); // 포커스 제거
+            }}
             style={{
               display: "flex",
               alignItems: "center",
@@ -401,11 +407,11 @@ export default function App() {
             }}
             onMouseLeave={(e) => {
               e.target.style.transform = "translateY(0)";
-              e.target.style.boxShadow = "0 2px 8px rgba(0,0,0,0.1)";
+              e.target.style.boxShadow = "none";
             }}
           >
             <span style={{
-              fontSize: "1.1rem",
+              fontSize: "0.88rem",
               fontWeight: "600",
               color: "#333",
               fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
@@ -423,7 +429,13 @@ export default function App() {
           </div>
           
           <div
-            onClick={() => window.open('https://tmap.life/92aad9a9', '_blank')}
+            onClick={(e) => {
+              window.open('https://tmap.life/92aad9a9', '_blank');
+              // 클릭 후 호버 상태 리셋
+              e.target.style.transform = "translateY(0)";
+              e.target.style.boxShadow = "none";
+              e.target.blur(); // 포커스 제거
+            }}
             style={{
               display: "flex",
               alignItems: "center",
@@ -440,11 +452,11 @@ export default function App() {
             }}
             onMouseLeave={(e) => {
               e.target.style.transform = "translateY(0)";
-              e.target.style.boxShadow = "0 2px 8px rgba(0,0,0,0.1)";
+              e.target.style.boxShadow = "none";
             }}
           >
             <span style={{
-              fontSize: "1.1rem",
+              fontSize: "0.88rem",
               fontWeight: "600",
               color: "#333",
               fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"

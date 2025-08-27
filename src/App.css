@@ -212,6 +212,13 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
   transform: translateY(40px);
 }
 
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  20% { opacity: 0.7; }
+  80% { opacity: 0.7; }
+  100% { opacity: 0; }
+}
+
 .container-html,
 .handwriting-title-html,
 .photo-card-html,
@@ -241,7 +248,7 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
 }
 .calendar-title {
   font-family: 'MaruBuriBold', 'MaruBuri', sans-serif;
-  font-size: 1.15rem;
+  font-size: 0.92rem;
   color: #062ddd;
   margin-bottom: 10px;
   font-weight: 700;
@@ -255,7 +262,7 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
 }
 .calendar-table th {
   font-family: 'MaruBuriSemiBold', 'MaruBuri', sans-serif;
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: #888;
   font-weight: 600;
   padding: 0 0 4px 0;
@@ -266,7 +273,7 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
 }
 .calendar-date, .calendar-circle {
   font-family: 'MaruBuri', sans-serif;
-  font-size: 1.05rem;
+  font-size: 0.84rem;
   color: #bbb;
   text-align: center;
   width: 36px;
@@ -305,21 +312,21 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
 }
 .invite-names {
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 0.88rem;
   color: #222;
   font-family: 'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
   font-weight: 500;
   margin-bottom: 8px;
 }
 .invite-parent {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #222;
   letter-spacing: 0.01em;
   margin-right: 2px;
 }
 .invite-mainname {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #222;
   letter-spacing: 0.01em;
@@ -340,13 +347,13 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
   letter-spacing: 0.01em;
 }
 .ceremony-place {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   margin-bottom: 2px;
   color: #444;
   font-weight: 500;
 }
 .ceremony-datetime {
-  font-size: 1.15rem;
+  font-size: 0.92rem;
   color: #888;
   font-weight: 400;
 }
