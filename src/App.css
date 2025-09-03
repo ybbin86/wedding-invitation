@@ -93,7 +93,7 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
 }
 
 .handwriting-text {
-  font-family: 'Cherolina', 'Alex Brush', 'Yellowtail', cursive, serif;
+  font-family: 'Cherolina', cursive;
   font-size: 3rem;
   fill: none;
   /* stroke: #3057e2; */
@@ -101,8 +101,7 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
   stroke-width: 0.8;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-  animation: draw 10s ease-in-out forwards;
-  font-display: swap;
+  animation: draw 5s ease-in-out forwards;
 }
 
 @keyframes draw {

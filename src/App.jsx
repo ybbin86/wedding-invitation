@@ -506,8 +506,9 @@ export default function App() {
               color: "#333",
               fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
             }}>
-              <div style={{ fontWeight: "600", marginBottom: "5px" }}>루이비스컨벤션 송파문정</div>
-              <div>서울시 송파구 법원로9길 26 <span style={{ color: "#666", fontSize: "0.85rem" }}>(서울시 송파구 문정동 645-2)</span></div>
+              <div style={{ fontWeight: "600", marginBottom: "5px"}}>루이비스컨벤션 송파문정</div>
+              <div>서울시 송파구 법원로9길 26 </div>
+              <div style={{ color: "#666", fontSize: "0.85rem" }}>(서울시 송파구 문정동 645-2)</div>
             </div>
           </div>
 
@@ -522,7 +523,7 @@ export default function App() {
               margin: "0 0 15px 0",
               fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
             }}>
-              | 셔틀버스 |
+              | 문정역<span style={{ fontSize: "0.9rem" }}>↔</span>식장 셔틀버스 |
             </h3>
             <div style={{
               fontSize: "0.9rem",
@@ -558,10 +559,7 @@ export default function App() {
               fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
             }}>
               <div style={{ marginBottom: "8px" }}>
-                • 네비게이션 이용시 : "루이비스컨벤션" 또는 "주소" 입력
-              </div>
-              <div style={{ marginBottom: "8px" }}>
-                • 웨딩홀 건물(H비지니스파크) 내 A, B동 C, D동
+                웨딩홀 건물(H비지니스파크) 내 A, B동 C, D동
               </div>
               <div>
                 B1~ B4층 1300여대 주차 가능
