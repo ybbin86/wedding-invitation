@@ -28,7 +28,7 @@
 }
 @font-face {
   font-family: 'Cherolina';
-  src: url('./Cherolina.ttf') format('truetype');
+  src: url('/Cherolina.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -93,7 +93,7 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
 }
 
 .handwriting-text {
-  font-family: 'Cherolina', cursive;
+  font-family: 'Cherolina', 'Alex Brush', 'Yellowtail', cursive, serif;
   font-size: 3rem;
   fill: none;
   /* stroke: #3057e2; */
@@ -102,6 +102,7 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
   animation: draw 10s ease-in-out forwards;
+  font-display: swap;
 }
 
 @keyframes draw {
