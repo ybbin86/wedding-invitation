@@ -26,6 +26,12 @@
     src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.eot);
     src: url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.woff2) format("woff2"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-ExtraLight.ttf) format("truetype");
 }
+@font-face {
+  font-family: 'Cherolina';
+  src: url('./Cherolina.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
 body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadeanim, .invite-fadeanim span {
   font-family: 'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
@@ -65,6 +71,7 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
   height: auto;
   display: block;
   object-fit: contain;
+  border-radius: 300px 300px 0 0;
 }
 
 .handwriting-title-html {
@@ -75,6 +82,41 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
   align-items: center;
   margin: 0 auto;
   padding: 0;
+  text-align: center;
+  min-height: 80px;
+}
+
+.handwriting-svg {
+  width: 100%;
+  max-width: 300px;
+  height: 80px;
+}
+
+.handwriting-text {
+  font-family: 'Cherolina', cursive;
+  font-size: 3rem;
+  fill: none;
+  /* stroke: #3057e2; */
+  stroke: #5f5f5f;
+  stroke-width: 0.8;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw 10s ease-in-out forwards;
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 1000;
+    fill: transparent;
+  }
+  70% {
+    stroke-dashoffset: 0;
+    fill: transparent;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill: #062ddd;
+  }
 }
 
 .handwriting-title-html svg {
@@ -86,24 +128,7 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
   margin: 0 auto;
 }
 
-.handwriting-title-html text {
-  font-family: 'Yellowtail', cursive;
-  font-size: 100px;
-  fill: none;
-  stroke: #062ddd;
-  stroke-width: 2;
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: draw 4s ease-in-out forwards;
-  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15));
-  paint-order: stroke fill;
-}
 
-@keyframes draw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
 
 #vara-container, #vara-container svg {
   display: block;
@@ -249,7 +274,7 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
 .calendar-title {
   font-family: 'MaruBuriBold', 'MaruBuri', sans-serif;
   font-size: 0.92rem;
-  color: #062ddd;
+  color: #3d4fa0;
   margin-bottom: 10px;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -292,8 +317,8 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
 }
 .calendar-circle {
   background: none;
-  color: #062ddd;
-  border: 3px solid #3a7cff;
+  color: #3d4fa0;
+  border: 3px solid #425ac3;
   font-weight: 700;
   box-shadow: none;
 }

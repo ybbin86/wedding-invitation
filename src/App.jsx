@@ -56,38 +56,7 @@ export default function App() {
     return () => observer.disconnect();
   }, [scrollDirection]);
 
-  useEffect(() => {
-    function drawVara() {
-      const container = document.getElementById("vara-container");
-      if (container) container.innerHTML = "";
-      const width = varaRef.current
-        ? varaRef.current.offsetWidth
-        : 320; // 기본값
-      new window.Vara(
-        "#vara-container",
-        "https://raw.githubusercontent.com/akzhy/Vara/master/fonts/Parisienne/Parisienne.json",
-        [
-          {
-            text: "Wedding Invitation",
-            fontSize: Math.max(32, width / 10),
-            strokeWidth: 2,
-            color: "#062ddd",
-            y: 50,
-            x: 10,
-            duration: 4000,
-          },
-        ],
-        {
-          width: width,
-          height: 110,
-          textAlign: "center",
-        }
-      );
-    }
-    drawVara();
-    window.addEventListener("resize", drawVara);
-    return () => window.removeEventListener("resize", drawVara);
-  }, []);
+  // Cherolina 폰트를 사용한 정적 텍스트로 변경
 
   // 초대 문구 Intersection Observer (fadeinup/fadeoutdown)
   useEffect(() => {
@@ -206,14 +175,29 @@ export default function App() {
 
   return (
     <div className="container-html">
+      
+      <div className="photo-card-html" style={{ marginBottom: "-10px" }}>
+        <img src="./IMG_0795.JPG" alt="배경사진" />
+      </div>
       <div
-        id="vara-container"
         className="handwriting-title-html"
         ref={varaRef}
-        style={{ width: "95vw", maxWidth: 600, minWidth: 200 }}
-      ></div>
-      <div className="photo-card-html">
-        <img src="./IMG_0795.JPG" alt="배경사진" />
+        style={{ width: "100vw", maxWidth: 600, minWidth: 200, height: "100px", marginBottom: "-5px" }}
+      >
+        <svg className="handwriting-svg" viewBox="0 0 400 200">
+          <text x="50%" y="60%" className="handwriting-text" textAnchor="middle" dominantBaseline="middle">
+            Happy Wedding Day
+          </text>
+        </svg>
+      </div>
+      <div style={{
+          textAlign: "center",
+          marginTop: "5px",
+          fontSize: "1rem",
+          color: "#333",
+          fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
+        }}>
+        2025.11.29 Saturday 12:20
       </div>
       {/* 초대 문구 + 클립아트 */}
       <div
@@ -348,7 +332,7 @@ export default function App() {
             background: "#fff"
           }}
         />
-        <div style={{
+        {/* <div style={{
           fontSize: "1.6rem",
           fontWeight: 700,
           color: "#554c44",
@@ -357,7 +341,7 @@ export default function App() {
           letterSpacing: "0.01em"
         }}>
           오시는 길
-        </div>
+        </div> */}
         {/* <div style={{
           width: "80%",
           maxWidth: "500px",
@@ -491,9 +475,101 @@ export default function App() {
             borderRadius: 12,
             // boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
             display: "block",
-            margin: "0 auto"
+            margin: "0 auto 10px auto"
           }}
         />
+
+        {/* 오시는 길 상세 정보 */}
+        <div style={{
+          width: "100%",
+          maxWidth: 500,
+          margin: "0 auto",
+          padding: "0 20px",
+          textAlign: "left"
+        }}>
+          {/* 오시는 길 */}
+          <div style={{
+            padding: "20px"
+          }}>
+            <h3 style={{
+              fontSize: "1.1rem",
+              fontWeight: "700",
+              color: "#333",
+              margin: "0 0 15px 0",
+              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
+            }}>
+              | 오시는 길 |
+            </h3>
+            <div style={{
+              fontSize: "0.9rem",
+              lineHeight: "1.6",
+              color: "#333",
+              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
+            }}>
+              <div style={{ fontWeight: "600", marginBottom: "5px" }}>루이비스컨벤션 송파문정</div>
+              <div>서울시 송파구 법원로9길 26 <span style={{ color: "#666", fontSize: "0.85rem" }}>(서울시 송파구 문정동 645-2)</span></div>
+            </div>
+          </div>
+
+          {/* 셔틀버스 */}
+          <div style={{
+            padding: "20px"
+          }}>
+            <h3 style={{
+              fontSize: "1.1rem",
+              fontWeight: "700",
+              color: "#333",
+              margin: "0 0 15px 0",
+              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
+            }}>
+              | 셔틀버스 |
+            </h3>
+            <div style={{
+              fontSize: "0.9rem",
+              lineHeight: "1.6",
+              color: "#333",
+              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
+            }}>
+              <div>8호선 문정역 4번출구 앞 셔틀버스 10분 배차 운행</div>
+              <div style={{ color: "#e74c3c", fontSize: "0.85rem", marginTop: "5px" }}>
+                ※ 수서역은 셔틀버스가 없습니다.
+              </div>
+            </div>
+          </div>
+
+          {/* 주차 안내 */}
+          <div style={{
+            marginBottom: "40px",
+            padding: "20px",
+          }}>
+            <h3 style={{
+              fontSize: "1.1rem",
+              fontWeight: "700",
+              color: "#333",
+              margin: "0 0 15px 0",
+              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
+            }}>
+              | 주차 안내 |
+            </h3>
+            <div style={{
+              fontSize: "0.9rem",
+              lineHeight: "1.6",
+              color: "#333",
+              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
+            }}>
+              <div style={{ marginBottom: "8px" }}>
+                • 네비게이션 이용시 : "루이비스컨벤션" 또는 "주소" 입력
+              </div>
+              <div style={{ marginBottom: "8px" }}>
+                • 웨딩홀 건물(H비지니스파크) 내 A, B동 C, D동
+              </div>
+              <div>
+                B1~ B4층 1300여대 주차 가능
+              </div>
+            </div>
+          </div>
+        </div>
+        
       </div>
 
 
