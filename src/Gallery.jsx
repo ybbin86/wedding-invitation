@@ -13,56 +13,73 @@ const GALLERY_IMAGES = [
 ];
 
 export default function Gallery() {
-  const [currentImage, setCurrentImage] = useState(0);
+  const [currentImage, setCurrentImage] = useState(1); // 1부터 시작 (복제된 첫 번째 이미지)
   const [isAnimating, setIsAnimating] = useState(false);
-  const [slideDirection, setSlideDirection] = useState("");
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
   const isDragging = useRef(false);
+  
+  // 무한 루프를 위해 앞뒤에 이미지 복제
+  const extendedImages = [
+    GALLERY_IMAGES[GALLERY_IMAGES.length - 1], // 마지막 이미지 복제
+    ...GALLERY_IMAGES,
+    GALLERY_IMAGES[0] // 첫 번째 이미지 복제
+  ];
 
   const nextImage = () => {
     if (isAnimating) return;
     setIsAnimating(true);
-    setSlideDirection("left");
+    setCurrentImage(prev => prev + 1);
     setTimeout(() => {
-      setCurrentImage((prev) => (prev + 1) % GALLERY_IMAGES.length);
-      setSlideDirection("");
       setIsAnimating(false);
-    }, 150);
+      // 마지막 복제 이미지에 도달하면 실제 첫 번째로 점프
+      setCurrentImage(prev => {
+        if (prev === extendedImages.length - 1) {
+          return 1; // 실제 첫 번째 이미지 인덱스
+        }
+        return prev;
+      });
+    }, 300);
   };
 
   const prevImage = () => {
     if (isAnimating) return;
     setIsAnimating(true);
-    setSlideDirection("right");
+    setCurrentImage(prev => prev - 1);
     setTimeout(() => {
-      setCurrentImage((prev) => (prev - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length);
-      setSlideDirection("");
       setIsAnimating(false);
-    }, 150);
+      // 첫 번째 복제 이미지에 도달하면 실제 마지막으로 점프
+      setCurrentImage(prev => {
+        if (prev === 0) {
+          return extendedImages.length - 2; // 실제 마지막 이미지 인덱스
+        }
+        return prev;
+      });
+    }, 300);
   };
 
-  // 터치 시작
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX;
-    isDragging.current = true;
+  // 터치/마우스 시작
+  const handleStart = (clientX) => {
+    touchStartX.current = clientX;
+    touchEndX.current = clientX;
+    isDragging.current = false; // 처음에는 드래그 상태가 아님
   };
 
-  // 터치 이동
-  const handleTouchMove = (e) => {
-    if (!isDragging.current) return;
-    touchEndX.current = e.touches[0].clientX;
+  // 터치/마우스 이동
+  const handleMove = (clientX) => {
+    touchEndX.current = clientX;
+    const deltaX = Math.abs(touchStartX.current - clientX);
+    if (deltaX > 10) { // 10px 이상 이동하면 드래그로 간주
+      isDragging.current = true;
+    }
   };
 
-  // 터치 끝
-  const handleTouchEnd = () => {
-    if (!isDragging.current) return;
-    isDragging.current = false;
-    
-    const deltaX = touchStartX.current - touchEndX.current;
-    const minSwipeDistance = 50; // 최소 스와이프 거리
+  // 터치/마우스 끝
+  const handleEnd = (clientX) => {
+    const deltaX = touchStartX.current - clientX;
+    const minSwipeDistance = 50;
 
-    if (Math.abs(deltaX) > minSwipeDistance) {
+    if (isDragging.current && Math.abs(deltaX) > minSwipeDistance) {
       if (deltaX > 0) {
         // 왼쪽으로 스와이프 - 다음 이미지
         nextImage();
@@ -70,35 +87,42 @@ export default function Gallery() {
         // 오른쪽으로 스와이프 - 이전 이미지
         prevImage();
       }
+    } else if (!isDragging.current) {
+      // 드래그가 아닌 경우 클릭으로 처리
+      const containerWidth = touchEndX.current; // 실제로는 컨테이너 너비 기준으로 계산해야 함
+      // 이 부분은 클릭 영역에서 처리
     }
+    
+    isDragging.current = false;
   };
 
-  // 마우스 이벤트 (데스크톱용)
+  // 터치 이벤트
+  const handleTouchStart = (e) => {
+    handleStart(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    handleMove(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e) => {
+    handleEnd(e.changedTouches[0].clientX);
+  };
+
+  // 마우스 이벤트
   const handleMouseDown = (e) => {
-    touchStartX.current = e.clientX;
-    isDragging.current = true;
+    handleStart(e.clientX);
   };
 
   const handleMouseMove = (e) => {
-    if (!isDragging.current) return;
-    touchEndX.current = e.clientX;
+    handleMove(e.clientX);
   };
 
-  const handleMouseUp = () => {
-    if (!isDragging.current) return;
-    isDragging.current = false;
-    
-    const deltaX = touchStartX.current - touchEndX.current;
-    const minSwipeDistance = 50;
-
-    if (Math.abs(deltaX) > minSwipeDistance) {
-      if (deltaX > 0) {
-        nextImage();
-      } else {
-        prevImage();
-      }
-    }
+  const handleMouseUp = (e) => {
+    handleEnd(e.clientX);
   };
+
+
 
   return (
     <div className="gallery-wrap">
@@ -111,7 +135,7 @@ export default function Gallery() {
           minWidth: 375, 
           margin: "0 auto 12px auto",
           userSelect: "none", // 드래그 시 텍스트 선택 방지
-          cursor: "grab",
+          cursor: "pointer",
           overflow: "hidden", // 슬라이딩 애니메이션을 위해 추가
           borderRadius: 18
         }}
@@ -123,19 +147,66 @@ export default function Gallery() {
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp} // 마우스가 영역을 벗어날 때도 처리
       >
-        <img
-          src={`./gallery/${GALLERY_IMAGES[currentImage]}`}
-          alt={`gallery-${currentImage}`}
-          style={{ 
-            width: "100%", 
-            height: 400, 
-            objectFit: "contain", 
-            borderRadius: 18,
-            display: "block",
-            pointerEvents: "none", // 이미지 드래그 방지
-            transform: slideDirection === "left" ? "translateX(-100%)" : 
-                      slideDirection === "right" ? "translateX(100%)" : "translateX(0)",
+        {/* 슬라이딩 컨테이너 */}
+        <div
+          style={{
+            display: "flex",
+            width: `${extendedImages.length * 100}%`,
+            transform: `translateX(-${currentImage * (100 / extendedImages.length)}%)`,
             transition: isAnimating ? "transform 0.3s ease-in-out" : "none"
+          }}
+        >
+          {extendedImages.map((img, idx) => (
+            <img
+              key={`${img}-${idx}`}
+              src={`./gallery/${img}`}
+              alt={`gallery-${idx}`}
+              style={{
+                width: `${100 / extendedImages.length}%`,
+                height: 400,
+                objectFit: "contain",
+                borderRadius: 18,
+                display: "block",
+                pointerEvents: "none",
+                flexShrink: 0
+              }}
+            />
+          ))}
+        </div>
+
+        {/* 왼쪽 클릭 영역 */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "50%",
+            height: "100%",
+            cursor: "pointer",
+            zIndex: 1
+          }}
+          onClick={() => {
+            if (!isDragging.current) {
+              prevImage();
+            }
+          }}
+        />
+
+        {/* 오른쪽 클릭 영역 */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            width: "50%",
+            height: "100%",
+            cursor: "pointer",
+            zIndex: 1
+          }}
+          onClick={() => {
+            if (!isDragging.current) {
+              nextImage();
+            }
           }}
         />
         
@@ -152,7 +223,7 @@ export default function Gallery() {
           fontSize: "11px",
           zIndex: 2
         }}>
-          {currentImage + 1} / {GALLERY_IMAGES.length}
+          {((currentImage - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length) + 1} / {GALLERY_IMAGES.length}
         </div>
 
         {/* 스와이프 힌트 (첫 번째 이미지에서만 표시) */}
@@ -176,36 +247,45 @@ export default function Gallery() {
       </div>
       
       {/* 썸네일 */}
-      <div style={{ 
-        display: "flex", 
-        gap: "8px", 
-        width: "100%", 
-        maxWidth: 600, 
-        minWidth: 375, 
-        margin: "0 auto",
-        overflowX: "auto",
-        padding: "0 10px"
-      }}>
-        {GALLERY_IMAGES.map((img, idx) => (
-          <img
-            key={img}
-            src={`./gallery/${img}`}
-            alt={`thumb-${idx}`}
-            onClick={() => setCurrentImage(idx)}
-            style={{ 
-              width: "60px", 
-              height: "60px", 
-              objectFit: "cover", 
-              borderRadius: 8, 
-              cursor: "pointer",
-              border: "2px solid #eee",
-              opacity: currentImage === idx ? 1 : 0.6,
-              transform: currentImage === idx ? "scale(1.05)" : "scale(1)",
-              transition: "all 0.2s ease",
-              flexShrink: 0
-            }}
-          />
-        ))}
+      <div 
+        className="gallery-thumbnails"
+        style={{ 
+          display: "flex", 
+          gap: "8px", 
+          width: "100%", 
+          maxWidth: 600, 
+          minWidth: 375, 
+          margin: "0 auto",
+          overflowX: "auto",
+          overflowY: "hidden",
+          padding: "0 10px",
+          height: "80px", // 고정 높이 설정
+          alignItems: "center"
+        }}>
+        {GALLERY_IMAGES.map((img, idx) => {
+          const realCurrentIndex = (currentImage - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+          return (
+            <img
+              key={img}
+              src={`./gallery/${img}`}
+              alt={`thumb-${idx}`}
+              onClick={() => setCurrentImage(idx + 1)} // +1 because of the prepended image
+              style={{ 
+                width: "70px", 
+                height: "70px", 
+                objectFit: "cover", 
+                borderRadius: "12px", 
+                cursor: "pointer",
+                border: "2px solid #eee",
+                opacity: realCurrentIndex === idx ? 1 : 0.6,
+                transform: realCurrentIndex === idx ? "scale(1.05)" : "scale(1)",
+                transition: "all 0.2s ease",
+                flexShrink: 0,
+                display: "block" // 인라인 요소로 인한 여백 제거
+              }}
+            />
+          );
+        })}
       </div>
     </div>
   );

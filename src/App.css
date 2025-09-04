@@ -439,3 +439,29 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
     width: 98vw;
   }
 }
+
+/* 갤러리 썸네일 스크롤바 스타일링 */
+.gallery-thumbnails {
+  scrollbar-width: thin; /* Firefox - 얇은 스크롤바 */
+  scrollbar-color: rgba(0, 0, 0, 0.3) rgba(255, 255, 255, 0.1); /* Firefox - 회색 thumb, 반투명 흰색 track */
+}
+
+.gallery-thumbnails::-webkit-scrollbar {
+  height: 8px; /* Chrome/Safari - 스크롤바 높이 */
+}
+
+.gallery-thumbnails::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1); /* Chrome/Safari - 반투명 흰색 트랙 */
+  border-radius: 4px;
+}
+
+.gallery-thumbnails::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3); /* Chrome/Safari - 반투명 회색 thumb */
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* 음영 추가 */
+}
+
+.gallery-thumbnails::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5); /* Chrome/Safari - 호버 시 더 진한 회색 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* 호버 시 더 진한 음영 */
+}
