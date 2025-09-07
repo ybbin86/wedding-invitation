@@ -177,7 +177,7 @@ export default function App() {
     <div className="container-html">
       
       <div className="photo-card-html" style={{ marginBottom: "-10px" }}>
-        <img src="./IMG_0795.JPG" alt="배경사진" />
+        <img src="./main.png" alt="배경사진" />
       </div>
       <div
         className="handwriting-title-html"

@@ -1,15 +1,39 @@
 import { useState, useRef } from "react";
 
 const GALLERY_IMAGES = [
-  "IMG_0788.JPG",
-  "IMG_0789.JPG",
-  "IMG_0791.JPG",
-  "IMG_0793.JPG",
-  "IMG_0794.JPG",
-  "IMG_0795.JPG",
-  "IMG_0796.JPG",
-  "IMG_0806.JPG",
-  "IMG_0807 3.JPG"
+  // "IMG_0788.JPG",
+  // "IMG_0789.JPG",
+  // "IMG_0791.JPG",
+  // "IMG_0793.JPG",
+  // "IMG_0794.JPG",
+  // "IMG_0795.JPG",
+  // "IMG_0796.JPG",
+  // "IMG_0806.JPG",
+  // "IMG_0807 3.JPG",
+  // "grid1.png"
+  "04.png",
+  "01.png",
+  "02.png",
+  "03.png",
+  // "05.png",
+  "06.png",
+  "07.png",
+  "08.png",
+  "09.png",
+  "10.png",
+  "11.png",
+  "12.png",
+  "13.png",
+  "14.png",
+  "15.JPG",
+  "16.JPG",
+  "17.jpg",
+  "18.JPG",
+  "19.JPG",
+  "20.jpg",
+  "21.jpg",
+  "22.JPG",
+  "23.JPG",
 ];
 
 export default function Gallery() {

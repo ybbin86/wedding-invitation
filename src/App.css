@@ -101,7 +101,7 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
   stroke-width: 0.8;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-  animation: draw 5s ease-in-out forwards;
+  animation: draw 10s ease-in-out forwards;
 }
 
 @keyframes draw {
