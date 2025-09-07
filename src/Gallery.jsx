@@ -12,7 +12,7 @@ const GALLERY_IMAGES = [
   // "IMG_0807 3.JPG",
   // "grid1.png"
   "04.png",
-  "01.png",
+  // "01.png",
   "02.png",
   "03.png",
   // "05.png",
@@ -25,15 +25,15 @@ const GALLERY_IMAGES = [
   "12.png",
   "13.png",
   "14.png",
-  "15.JPG",
-  "16.JPG",
+  "15.png",
+  "16.png",
   "17.jpg",
   "18.JPG",
   "19.JPG",
   "20.jpg",
   "21.jpg",
   "22.JPG",
-  "23.JPG",
+  "23.png",
 ];
 
 export default function Gallery() {
