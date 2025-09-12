@@ -621,11 +621,7 @@ export default function App() {
           maxWidth: 600,
           minWidth: 375,
           margin: "0px auto 40px auto",
-          textAlign: "center",
-          padding: "0 15px",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center"
+          textAlign: "center"
         }}
       >
         <img
