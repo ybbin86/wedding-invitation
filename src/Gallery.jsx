@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const GALLERY_IMAGES = [
   // "IMG_0788.JPG",
@@ -42,6 +42,46 @@ export default function Gallery() {
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
   const isDragging = useRef(false);
+  const thumbnailContainerRef = useRef(null);
+  
+  // 썸네일 자동 스크롤 함수
+  const scrollToCurrentThumbnail = () => {
+    if (!thumbnailContainerRef.current) return;
+    
+    const realCurrentIndex = (currentImage - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+    const container = thumbnailContainerRef.current;
+    const thumbnailWidth = 70 + 8; // 썸네일 너비 + gap
+    const containerWidth = container.clientWidth;
+    const scrollLeft = container.scrollLeft;
+    
+    // 현재 썸네일의 위치
+    const thumbnailLeft = realCurrentIndex * thumbnailWidth;
+    const thumbnailRight = thumbnailLeft + thumbnailWidth;
+    
+    // 현재 보이는 범위
+    const visibleLeft = scrollLeft;
+    const visibleRight = scrollLeft + containerWidth;
+    
+    // 스크롤이 필요한지 확인
+    if (thumbnailLeft < visibleLeft) {
+      // 왼쪽으로 스크롤 (이전 이미지)
+      container.scrollTo({
+        left: thumbnailLeft - 10, // 약간의 여백
+        behavior: 'smooth'
+      });
+    } else if (thumbnailRight > visibleRight) {
+      // 오른쪽으로 스크롤 (다음 이미지)
+      container.scrollTo({
+        left: thumbnailRight - containerWidth + 10, // 약간의 여백
+        behavior: 'smooth'
+      });
+    }
+  };
+  
+  // currentImage가 변경될 때마다 썸네일 스크롤
+  useEffect(() => {
+    scrollToCurrentThumbnail();
+  }, [currentImage]);
   
   // 무한 루프를 위해 앞뒤에 이미지 복제
   const extendedImages = [
@@ -272,6 +312,7 @@ export default function Gallery() {
       
       {/* 썸네일 */}
       <div 
+        ref={thumbnailContainerRef}
         className="gallery-thumbnails"
         style={{ 
           display: "flex", 
