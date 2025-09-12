@@ -346,7 +346,7 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: url('./crayon_circle.png') center/contain no-repeat;
+  background: url('/crayon_circle.png') center/contain no-repeat;
   z-index: 10;
   pointer-events: none;
 }
