@@ -738,7 +738,8 @@ export default function App() {
                 border: "none",
                 fontSize: "20px",
                 cursor: "pointer",
-                color: "#999"
+                color: "#999",
+                zIndex: 10
               }}
             >
               ×
@@ -748,8 +749,13 @@ export default function App() {
               fontSize: "1.2rem",
               fontWeight: "700",
               color: "#385b85",
+              marginTop: "12px",
               marginBottom: "20px",
-              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
+              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif",
+              position: "absolute",
+              top: "15px",
+              left: "30px",
+              right: "30px"
             }}>
               신랑측 계좌번호
             </h3>
@@ -761,7 +767,8 @@ export default function App() {
               fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif",
               display: "flex",
               flexDirection: "column",
-              alignItems: "center"
+              alignItems: "center",
+              marginTop: "50px"
             }}>
               <div style={{ marginBottom: "15px" }}>
                 <div style={{ fontWeight: "600", marginBottom: "5px", textAlign: "center" }}>신랑 조영빈</div>
@@ -873,7 +880,8 @@ export default function App() {
                 border: "none",
                 fontSize: "20px",
                 cursor: "pointer",
-                color: "#999"
+                color: "#999",
+                zIndex: 10
               }}
             >
               ×
@@ -883,8 +891,13 @@ export default function App() {
               fontSize: "1.2rem",
               fontWeight: "700",
               color: "#d4a574",
+              marginTop: "12px",
               marginBottom: "20px",
-              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
+              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif",
+              position: "absolute",
+              top: "15px",
+              left: "30px",
+              right: "30px"
             }}>
               신부측 계좌번호
             </h3>
@@ -896,7 +909,8 @@ export default function App() {
               fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif",
               display: "flex",
               flexDirection: "column",
-              alignItems: "center"
+              alignItems: "center",
+              marginTop: "50px"
             }}>
               <div style={{ marginBottom: "15px" }}>
                 <div style={{ fontWeight: "600", marginBottom: "5px", textAlign: "center" }}>신부 김효영</div>
@@ -974,6 +988,47 @@ export default function App() {
           </div>
         </div>
       )}
+
+      {/* 캐릭터 이미지 */}
+      <div style={{
+        width: "100%",
+        textAlign: "center",
+        // marginTop: "0px",
+        // marginBottom: "40px"
+      }}>
+        <img
+          src="./wedding_character.jpg"
+          alt="웨딩 캐릭터"
+          style={{
+            width: "60%",
+            maxWidth: 600,
+            minWidth: 375,
+            height: "auto",
+            borderRadius: 16,
+            display: "block",
+            margin: "0 auto"
+          }}
+        />
+      </div>
+      <div style={{
+        width: "100%",
+        textAlign: "center",
+        marginTop: "-40px",
+        marginBottom: "40px"
+      }}>
+        <img
+          src="./hyb.png"
+          alt="웨딩 캐릭터"
+          style={{
+             width: "60%",
+             maxWidth: 200,
+             height: "auto",
+             borderRadius: 16,
+             display: "block",
+             margin: "0 auto"
+           }}
+        />
+      </div>
 
       {/* BGM 오디오 */}
       <audio ref={audioRef} src="./bgm.mp3" autoPlay loop preload="auto" />
