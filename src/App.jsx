@@ -17,6 +17,12 @@ export default function App() {
   const [galleryAnim, setGalleryAnim] = useState("hidden");
   const mapSectionRef = useRef(null);
   const [mapSectionAnim, setMapSectionAnim] = useState("hidden");
+  const accountRef = useRef(null);
+  const [accountAnim, setAccountAnim] = useState("hidden");
+  
+  // 계좌번호 팝업 상태
+  const [showGroomAccount, setShowGroomAccount] = useState(false);
+  const [showBrideAccount, setShowBrideAccount] = useState(false);
   
   // 스크롤 방향 감지
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -131,6 +137,25 @@ export default function App() {
       { threshold: 0.2 }
     );
     observer.observe(mapSectionRef.current);
+    return () => observer.disconnect();
+  }, [scrollDirection]);
+
+  // 계좌번호 섹션 fade 애니메이션
+  useEffect(() => {
+    if (!accountRef.current) return;
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setAccountAnim("fadeinup");
+        } else if (scrollDirection === "up") {
+          // 위로 스크롤할 때만 사라짐
+          setAccountAnim("fadeoutdown");
+        }
+        // 아래로 스크롤할 때는 아무것도 하지 않음 (그대로 유지)
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(accountRef.current);
     return () => observer.disconnect();
   }, [scrollDirection]);
 
@@ -349,121 +374,7 @@ export default function App() {
           backgroundColor: "#ddd",
           margin: "20px auto 10px auto"
         }}></div> */}
-        <div style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "30px",
-          // marginBottom: "20px",
-          flexWrap: "wrap"
-        }}>
-          <div style={{
-            fontSize: "0.88rem",
-            fontWeight: "600", 
-            color: "#554c44",
-            fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif",
-            marginTop: "14px"
-          }}>
-            <span>
-              Navigation
-            </span>
-          </div>
-          <div
-            onClick={(e) => {
-              window.open('https://naver.me/Gctrli34', '_blank');
-              // 클릭 후 호버 상태 리셋
-              e.target.style.transform = "translateY(0)";
-              e.target.style.boxShadow = "none";
-              e.target.blur(); // 포커스 제거
-            }}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              cursor: "pointer",
-              padding: "8px 12px",
-              borderRadius: "8px",
-              transition: "all 0.2s ease",
-              // boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.transform = "translateY(-2px)";
-              e.target.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.transform = "translateY(0)";
-              e.target.style.boxShadow = "none";
-            }}
-          >
-            <span style={{
-              fontSize: "0.88rem",
-              fontWeight: "600",
-              color: "#333",
-              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
-            }}>
-              네이버지도
-            </span>
-            <img
-              src="./naver_map.png"
-              alt="네이버지도"
-              style={{
-                height: "40px",
-                borderRadius: "6px"
-              }}
-            />
-          </div>
-          
-          <div
-            onClick={(e) => {
-              window.open('https://tmap.life/92aad9a9', '_blank');
-              // 클릭 후 호버 상태 리셋
-              e.target.style.transform = "translateY(0)";
-              e.target.style.boxShadow = "none";
-              e.target.blur(); // 포커스 제거
-            }}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              cursor: "pointer",
-              padding: "8px 12px",
-              borderRadius: "8px",
-              transition: "all 0.2s ease",
-              // boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
-            }}
-            onMouseEnter={(e) => {
-              e.target.style.transform = "translateY(-2px)";
-              e.target.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.transform = "translateY(0)";
-              e.target.style.boxShadow = "none";
-            }}
-          >
-            <span style={{
-              fontSize: "0.88rem",
-              fontWeight: "600",
-              color: "#333",
-              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
-            }}>
-              티맵
-            </span>
-            <img
-              src="./tmap.png"
-              alt="티맵"
-              style={{
-                height: "35px",
-                borderRadius: "6px"
-              }}
-            />
-          </div>
-        </div>
-        {/* <div style={{
-          width: "80%",
-          maxWidth: "500px",
-          height: "1px",
-          backgroundColor: "#ddd",
-          margin: "20px auto 10px auto"
-        }}></div> */}
+
         
         <img
           src="./sketch_map.png"
@@ -475,9 +386,140 @@ export default function App() {
             borderRadius: 12,
             // boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
             display: "block",
-            margin: "0 auto 10px auto"
+            margin: "30px auto 0px auto"
           }}
         />
+
+        {/* 네비게이션 링크 */}
+        <div style={{
+          // marginTop: "12px",
+          display: "flex",
+          borderRadius: "8px",
+          overflow: "hidden",
+          // border: "1px solid #e5e7eb",
+          backgroundColor: "white",
+          // boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.1)",
+          maxWidth: "400px",
+          margin: "0px auto 10px auto"
+        }}>
+          <a
+            href="https://naver.me/Gctrli34"
+            target="_blank"
+            rel="noreferrer noopener"
+            style={{
+              flex: 1,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "6px",
+              padding: "8px",
+              fontSize: "13px",
+              fontWeight: "500",
+              textDecoration: "none",
+              color: "#333",
+              transition: "transform 0.1s ease",
+              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
+            }}
+            onMouseDown={(e) => {
+              e.target.style.transform = "scale(0.98)";
+            }}
+            onMouseUp={(e) => {
+              e.target.style.transform = "scale(1)";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = "scale(1)";
+            }}
+          >
+            <img 
+              src="./navermap_logo.png" 
+              alt="네이버지도" 
+              style={{ width: "16px", height: "16px", objectFit: "contain" }}
+            />
+            <span>네이버지도</span>
+          </a>
+          
+          <div style={{
+            width: "1px",
+            backgroundColor: "#e5e7eb"
+          }}></div>
+          
+          <a
+            href="https://kko.kakao.com/uP5nwoZ3FZ"
+            target="_blank"
+            rel="noreferrer noopener"
+            style={{
+              flex: 1,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "6px",
+              padding: "8px",
+              fontSize: "13px",
+              fontWeight: "500",
+              textDecoration: "none",
+              color: "#333",
+              transition: "transform 0.1s ease",
+              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
+            }}
+            onMouseDown={(e) => {
+              e.target.style.transform = "scale(0.98)";
+            }}
+            onMouseUp={(e) => {
+              e.target.style.transform = "scale(1)";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = "scale(1)";
+            }}
+          >
+            <img 
+              src="./kakaomap_logo.png" 
+              alt="카카오맵" 
+              style={{ width: "16px", height: "16px", objectFit: "contain" }}
+            />
+            <span>카카오맵</span>
+          </a>
+          
+          <div style={{
+            width: "1px",
+            backgroundColor: "#e5e7eb"
+          }}></div>
+          
+          <a
+            href="https://tmap.life/92aad9a9"
+            target="_blank"
+            rel="noreferrer noopener"
+            style={{
+              flex: 1,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "6px",
+              padding: "8px",
+              fontSize: "13px",
+              fontWeight: "500",
+              textDecoration: "none",
+              color: "#333",
+              transition: "transform 0.1s ease",
+              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
+            }}
+            onMouseDown={(e) => {
+              e.target.style.transform = "scale(0.98)";
+            }}
+            onMouseUp={(e) => {
+              e.target.style.transform = "scale(1)";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = "scale(1)";
+            }}
+          >
+            <img 
+              src="./tmap_logo.png" 
+              alt="티맵" 
+              style={{ width: "16px", height: "16px", objectFit: "contain" }}
+            />
+            <span>티맵</span>
+          </a>
+        </div>
 
         {/* 오시는 길 상세 정보 */}
         <div style={{
@@ -570,6 +612,369 @@ export default function App() {
         
       </div>
 
+      {/* 계좌번호 섹션 */}
+      <div
+        ref={accountRef}
+        className={`account-fadeanim ${accountAnim}`}
+        style={{
+          width: "100%",
+          maxWidth: 600,
+          minWidth: 375,
+          margin: "0px auto 40px auto",
+          textAlign: "center",
+          padding: "0 20px"
+        }}
+      >
+        <img
+          src="./wedding_clippart_middle.png"
+          alt="wedding clippart"
+          style={{
+            width: 200,
+            maxWidth: "100%",
+            margin: "0 auto 40px auto",
+            display: "block",
+            borderRadius: 16,
+            background: "#fff"
+          }}
+        />
+        <div style={{
+          fontSize: "1.4rem",
+          fontWeight: "700",
+          color: "#554c44",
+          marginBottom: "30px",
+          fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif",
+          letterSpacing: "0.01em"
+        }}>
+          마음 전하실 곳(계좌번호)
+        </div>
+        
+        <div style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "15px",
+          alignItems: "center"
+        }}>
+          <button
+            onClick={() => setShowGroomAccount(true)}
+            style={{
+              padding: "12px 24px",
+              backgroundColor: "#385b85",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              fontSize: "0.9rem",
+              fontWeight: "600",
+              cursor: "pointer",
+              transition: "all 0.2s ease",
+              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif",
+              minWidth: "200px"
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = "#2a4a6b";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = "#385b85";
+            }}
+          >
+            신랑측 계좌번호 확인하기
+          </button>
+          
+          <button
+            onClick={() => setShowBrideAccount(true)}
+            style={{
+              padding: "12px 24px",
+              backgroundColor: "#d4a574",
+              color: "white",
+              border: "none",
+              borderRadius: "8px",
+              fontSize: "0.9rem",
+              fontWeight: "600",
+              cursor: "pointer",
+              transition: "all 0.2s ease",
+              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif",
+              minWidth: "200px"
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.backgroundColor = "#c49660";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.backgroundColor = "#d4a574";
+            }}
+          >
+            신부측 계좌번호 확인하기
+          </button>
+        </div>
+      </div>
+
+      {/* 신랑측 계좌번호 팝업 */}
+      {showGroomAccount && (
+        <div style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(0,0,0,0.5)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 1000
+        }}>
+          <div style={{
+            backgroundColor: "white",
+            borderRadius: "12px",
+            padding: "30px",
+            maxWidth: "350px",
+            width: "90%",
+            textAlign: "center",
+            position: "relative"
+          }}>
+            <button
+              onClick={() => setShowGroomAccount(false)}
+              style={{
+                position: "absolute",
+                top: "15px",
+                right: "15px",
+                background: "none",
+                border: "none",
+                fontSize: "20px",
+                cursor: "pointer",
+                color: "#999"
+              }}
+            >
+              ×
+            </button>
+            
+            <h3 style={{
+              fontSize: "1.2rem",
+              fontWeight: "700",
+              color: "#385b85",
+              marginBottom: "20px",
+              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
+            }}>
+              신랑측 계좌번호
+            </h3>
+            
+            <div style={{
+              fontSize: "0.9rem",
+              lineHeight: "1.6",
+              color: "#333",
+              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center"
+            }}>
+              <div style={{ marginBottom: "15px" }}>
+                <div style={{ fontWeight: "600", marginBottom: "5px", textAlign: "center" }}>신랑 조영빈</div>
+                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                  <span>국민은행 123456-78-901234</span>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText("국민은행 123456-78-901234");
+                      alert("계좌번호가 복사되었습니다!");
+                    }}
+                    style={{
+                      background: "none",
+                      border: "1px solid #ddd",
+                      borderRadius: "4px",
+                      padding: "4px 6px",
+                      cursor: "pointer",
+                      fontSize: "10px",
+                      color: "#666"
+                    }}
+                    title="복사하기"
+                  >
+                    복사
+                  </button>
+                </div>
+              </div>
+              <div style={{ marginBottom: "15px" }}>
+                <div style={{ fontWeight: "600", marginBottom: "5px", textAlign: "center" }}>아버지 조길현</div>
+                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                  <span>농협은행 987654-32-109876</span>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText("농협은행 987654-32-109876");
+                      alert("계좌번호가 복사되었습니다!");
+                    }}
+                    style={{
+                      background: "none",
+                      border: "1px solid #ddd",
+                      borderRadius: "4px",
+                      padding: "4px 6px",
+                      cursor: "pointer",
+                      fontSize: "10px",
+                      color: "#666"
+                    }}
+                    title="복사하기"
+                  >
+                    복사
+                  </button>
+                </div>
+              </div>
+              <div>
+                <div style={{ fontWeight: "600", marginBottom: "5px", textAlign: "center" }}>어머니 김인옥</div>
+                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                  <span>신한은행 567890-12-345678</span>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText("신한은행 567890-12-345678");
+                      alert("계좌번호가 복사되었습니다!");
+                    }}
+                    style={{
+                      background: "none",
+                      border: "1px solid #ddd",
+                      borderRadius: "4px",
+                      padding: "4px 6px",
+                      cursor: "pointer",
+                      fontSize: "10px",
+                      color: "#666"
+                    }}
+                    title="복사하기"
+                  >
+                    복사
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 신부측 계좌번호 팝업 */}
+      {showBrideAccount && (
+        <div style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(0,0,0,0.5)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          zIndex: 1000
+        }}>
+          <div style={{
+            backgroundColor: "white",
+            borderRadius: "12px",
+            padding: "30px",
+            maxWidth: "350px",
+            width: "90%",
+            textAlign: "center",
+            position: "relative"
+          }}>
+            <button
+              onClick={() => setShowBrideAccount(false)}
+              style={{
+                position: "absolute",
+                top: "15px",
+                right: "15px",
+                background: "none",
+                border: "none",
+                fontSize: "20px",
+                cursor: "pointer",
+                color: "#999"
+              }}
+            >
+              ×
+            </button>
+            
+            <h3 style={{
+              fontSize: "1.2rem",
+              fontWeight: "700",
+              color: "#d4a574",
+              marginBottom: "20px",
+              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
+            }}>
+              신부측 계좌번호
+            </h3>
+            
+            <div style={{
+              fontSize: "0.9rem",
+              lineHeight: "1.6",
+              color: "#333",
+              fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center"
+            }}>
+              <div style={{ marginBottom: "15px" }}>
+                <div style={{ fontWeight: "600", marginBottom: "5px", textAlign: "center" }}>신부 김효영</div>
+                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                  <span>우리은행 123456-78-901234</span>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText("우리은행 123456-78-901234");
+                      alert("계좌번호가 복사되었습니다!");
+                    }}
+                    style={{
+                      background: "none",
+                      border: "1px solid #ddd",
+                      borderRadius: "4px",
+                      padding: "4px 6px",
+                      cursor: "pointer",
+                      fontSize: "10px",
+                      color: "#666"
+                    }}
+                    title="복사하기"
+                  >
+                    복사
+                  </button>
+                </div>
+              </div>
+              <div style={{ marginBottom: "15px" }}>
+                <div style={{ fontWeight: "600", marginBottom: "5px", textAlign: "center" }}>아버지 김상진</div>
+                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                  <span>하나은행 987654-32-109876</span>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText("하나은행 987654-32-109876");
+                      alert("계좌번호가 복사되었습니다!");
+                    }}
+                    style={{
+                      background: "none",
+                      border: "1px solid #ddd",
+                      borderRadius: "4px",
+                      padding: "4px 6px",
+                      cursor: "pointer",
+                      fontSize: "10px",
+                      color: "#666"
+                    }}
+                    title="복사하기"
+                  >
+                    복사
+                  </button>
+                </div>
+              </div>
+              <div>
+                <div style={{ fontWeight: "600", marginBottom: "5px", textAlign: "center" }}>어머니 최경선</div>
+                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+                  <span>기업은행 567890-12-345678</span>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText("기업은행 567890-12-345678");
+                      alert("계좌번호가 복사되었습니다!");
+                    }}
+                    style={{
+                      background: "none",
+                      border: "1px solid #ddd",
+                      borderRadius: "4px",
+                      padding: "4px 6px",
+                      cursor: "pointer",
+                      fontSize: "10px",
+                      color: "#666"
+                    }}
+                    title="복사하기"
+                  >
+                    복사
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* BGM 오디오 */}
       <audio ref={audioRef} src="./bgm.mp3" autoPlay loop preload="auto" />
