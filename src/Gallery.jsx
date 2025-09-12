@@ -64,15 +64,15 @@ export default function Gallery() {
     
     // 스크롤이 필요한지 확인
     if (thumbnailLeft < visibleLeft) {
-      // 왼쪽으로 스크롤 (이전 이미지)
+      // 왼쪽으로 스크롤 (이전 이미지로 갈 때) - 썸네일이 잘 보이도록
       container.scrollTo({
-        left: thumbnailLeft - 10, // 약간의 여백
+        left: Math.max(0, thumbnailLeft - 20), // 20px 여백으로 충분히 보이게
         behavior: 'smooth'
       });
     } else if (thumbnailRight > visibleRight) {
-      // 오른쪽으로 스크롤 (다음 이미지)
+      // 오른쪽으로 스크롤 (다음 이미지로 갈 때) - 충분한 여백 확보
       container.scrollTo({
-        left: thumbnailRight - containerWidth + 10, // 약간의 여백
+        left: thumbnailRight - containerWidth + 70, // 오른쪽 끝에서 50px 여백으로 충분히 보이게
         behavior: 'smooth'
       });
     }
