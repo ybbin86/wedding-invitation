@@ -20,6 +20,57 @@ export default function App() {
   const accountRef = useRef(null);
   const [accountAnim, setAccountAnim] = useState("hidden");
   
+  // 로딩 상태 관리
+  const [isLoading, setIsLoading] = useState(true);
+  const [mainImageLoaded, setMainImageLoaded] = useState(false);
+  
+  // main.png 이미지 로딩 완료 핸들러
+  const handleMainImageLoad = () => {
+    console.log('Main image loaded!'); // 디버깅용
+    setMainImageLoaded(true);
+    
+    // 최소 1초는 로딩 화면을 보여준 후 종료 (로컬에서도 로딩 화면을 볼 수 있도록)
+    setTimeout(() => {
+      setIsLoading(false);
+      // handwriting 애니메이션 시작
+      setTimeout(() => {
+        const handwritingText = document.querySelector('.handwriting-text');
+        if (handwritingText) {
+          handwritingText.classList.add('animate');
+        }
+      }, 200); // 페이지 표시 후 0.2초 뒤에 애니메이션 시작
+    }, 1000); // 1초 후 로딩 화면 종료
+  };
+
+  // 컴포넌트 마운트 시 이미지가 이미 로딩되어 있는지 확인
+  useEffect(() => {
+    let timeoutId;
+    
+    const img = new Image();
+    img.onload = () => {
+      console.log('Image preloaded!'); // 디버깅용
+      if (timeoutId) clearTimeout(timeoutId);
+      handleMainImageLoad();
+    };
+    img.onerror = () => {
+      console.log('Image load error, proceeding anyway'); // 디버깅용
+      if (timeoutId) clearTimeout(timeoutId);
+      handleMainImageLoad();
+    };
+    
+    // 3초 후에도 로딩이 안 끝나면 강제로 진행
+    timeoutId = setTimeout(() => {
+      console.log('Loading timeout, proceeding anyway'); // 디버깅용
+      handleMainImageLoad();
+    }, 3000);
+
+    img.src = './main.png';
+    
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, []);
+  
   // 계좌번호 팝업 상태
   const [showGroomAccount, setShowGroomAccount] = useState(false);
   const [showBrideAccount, setShowBrideAccount] = useState(false);
@@ -198,11 +249,52 @@ export default function App() {
     mapRef.current._naver_map = map;
   }, []);
 
+  // 로딩 화면 렌더링
+  if (isLoading) {
+    return (
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: '#f8f8f8',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex: 9999
+      }}>
+        <div style={{
+          width: '60px',
+          height: '60px',
+          border: '4px solid #e0e0e0',
+          borderTop: '4px solid #385b85',
+          borderRadius: '50%',
+          animation: 'spin 1s linear infinite',
+          marginBottom: '20px'
+        }}></div>
+        <div style={{
+          fontSize: '1rem',
+          color: '#666',
+          fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
+        }}>
+          로딩 중...
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container-html">
       
       <div className="photo-card-html" style={{ marginBottom: "-10px" }}>
-        <img src="./main.png" alt="배경사진" />
+        <img 
+          src="./main.png" 
+          alt="배경사진" 
+          onLoad={handleMainImageLoad}
+          style={{ display: mainImageLoaded ? 'block' : 'none' }}
+        />
       </div>
       <div
         className="handwriting-title-html"

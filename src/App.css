@@ -101,6 +101,9 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
   stroke-width: 0.8;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
+}
+
+.handwriting-text.animate {
   animation: draw 10s ease-in-out forwards;
 }
 
@@ -117,6 +120,11 @@ body, .container-html, .handwriting-title-html, .photo-card-html, .invite-fadean
     stroke-dashoffset: 0;
     fill: #062ddd;
   }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .handwriting-title-html svg {
