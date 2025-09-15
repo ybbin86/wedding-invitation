@@ -96,7 +96,7 @@ export default function App() {
   // 갤러리 관련 import, 상수, 상태, useRef, useEffect, JSX 블록 등 전체 삭제
 
   useEffect(() => {
-    if (!varaRef.current) return;
+    if (isLoading || !varaRef.current) return; // 로딩 완료 후에만 실행
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -111,13 +111,13 @@ export default function App() {
     );
     observer.observe(varaRef.current);
     return () => observer.disconnect();
-  }, [scrollDirection]);
+  }, [scrollDirection, isLoading]); // isLoading 의존성 추가
 
   // Cherolina 폰트를 사용한 정적 텍스트로 변경
 
   // 초대 문구 Intersection Observer (fadeinup/fadeoutdown)
   useEffect(() => {
-    if (!inviteRef.current) return;
+    if (isLoading || !inviteRef.current) return; // 로딩 완료 후에만 실행
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -132,11 +132,11 @@ export default function App() {
     );
     observer.observe(inviteRef.current);
     return () => observer.disconnect();
-  }, [scrollDirection]);
+  }, [scrollDirection, isLoading]); // isLoading 의존성 추가
 
   // ceremony+calendar fade 애니메이션
   useEffect(() => {
-    if (!ceremonyRef.current) return;
+    if (isLoading || !ceremonyRef.current) return; // 로딩 완료 후에만 실행
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -151,11 +151,11 @@ export default function App() {
     );
     observer.observe(ceremonyRef.current);
     return () => observer.disconnect();
-  }, [scrollDirection]);
+  }, [scrollDirection, isLoading]); // isLoading 의존성 추가
 
   // 갤러리 fade 애니메이션
   useEffect(() => {
-    if (!galleryRef.current) return;
+    if (isLoading || !galleryRef.current) return; // 로딩 완료 후에만 실행
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -170,11 +170,11 @@ export default function App() {
     );
     observer.observe(galleryRef.current);
     return () => observer.disconnect();
-  }, [scrollDirection]);
+  }, [scrollDirection, isLoading]); // isLoading 의존성 추가
 
   // 약도 섹션 fade 애니메이션
   useEffect(() => {
-    if (!mapSectionRef.current) return;
+    if (isLoading || !mapSectionRef.current) return; // 로딩 완료 후에만 실행
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -189,11 +189,11 @@ export default function App() {
     );
     observer.observe(mapSectionRef.current);
     return () => observer.disconnect();
-  }, [scrollDirection]);
+  }, [scrollDirection, isLoading]); // isLoading 의존성 추가
 
   // 계좌번호 섹션 fade 애니메이션
   useEffect(() => {
-    if (!accountRef.current) return;
+    if (isLoading || !accountRef.current) return; // 로딩 완료 후에만 실행
     const observer = new window.IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -208,7 +208,7 @@ export default function App() {
     );
     observer.observe(accountRef.current);
     return () => observer.disconnect();
-  }, [scrollDirection]);
+  }, [scrollDirection, isLoading]); // isLoading 의존성 추가
 
   // BGM 자동재생 (음소거 상태 반영)
   useEffect(() => {
