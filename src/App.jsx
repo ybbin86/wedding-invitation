@@ -536,7 +536,7 @@ export default function App() {
           }}></div>
           
           <a
-            href="https://kko.kakao.com/uP5nwoZ3FZ"
+            href="https://kko.kakao.com/UibAcDq_L9"
             target="_blank"
             rel="noreferrer noopener"
             style={{
