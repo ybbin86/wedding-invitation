@@ -287,7 +287,7 @@ export default function App() {
             }}
           />
           <div className="ceremony-info">
-            <div className="ceremony-place">서울 송파구 문정 루이비스 컨벤션</div>
+            <div className="ceremony-place">서울 송파구 문정 루이비스 컨벤션 아모리스홀</div>
             <div className="ceremony-datetime">2025년 11월 29일 토요일 오후 12시 20분</div>
           </div>
           <div className="calendar-wrap">
@@ -601,7 +601,7 @@ export default function App() {
               fontFamily: "'MaruBuri', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif"
             }}>
               <div style={{ marginBottom: "8px" }}>
-                웨딩홀 건물(H비지니스파크) 내 A, B동 C, D동
+                웨딩홀 건물(H비지니스파크) 내 C, D동
               </div>
               <div>
                 B1~ B4층 1300여대 주차 가능
@@ -773,10 +773,10 @@ export default function App() {
               <div style={{ marginBottom: "15px" }}>
                 <div style={{ fontWeight: "600", marginBottom: "5px", textAlign: "center" }}>신랑 조영빈</div>
                 <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                  <span>국민은행 123456-78-901234</span>
+                  <span>카카오뱅크 3333-08-5827233</span>
                   <button
                     onClick={() => {
-                      navigator.clipboard.writeText("국민은행 123456-78-901234");
+                      navigator.clipboard.writeText("카카오뱅크 3333085827233");
                       alert("계좌번호가 복사되었습니다!");
                     }}
                     style={{
@@ -797,10 +797,10 @@ export default function App() {
               <div style={{ marginBottom: "15px" }}>
                 <div style={{ fontWeight: "600", marginBottom: "5px", textAlign: "center" }}>아버지 조길현</div>
                 <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                  <span>농협은행 987654-32-109876</span>
+                  <span>국민은행 304-21-0580-952</span>
                   <button
                     onClick={() => {
-                      navigator.clipboard.writeText("농협은행 987654-32-109876");
+                      navigator.clipboard.writeText("국민은행 304-21-0580-952");
                       alert("계좌번호가 복사되었습니다!");
                     }}
                     style={{
@@ -821,10 +821,10 @@ export default function App() {
               <div>
                 <div style={{ fontWeight: "600", marginBottom: "5px", textAlign: "center" }}>어머니 김인옥</div>
                 <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                  <span>신한은행 567890-12-345678</span>
+                  <span>농협 251-12-256604</span>
                   <button
                     onClick={() => {
-                      navigator.clipboard.writeText("신한은행 567890-12-345678");
+                      navigator.clipboard.writeText("농협 251-12-256604");
                       alert("계좌번호가 복사되었습니다!");
                     }}
                     style={{
@@ -915,10 +915,10 @@ export default function App() {
               <div style={{ marginBottom: "15px" }}>
                 <div style={{ fontWeight: "600", marginBottom: "5px", textAlign: "center" }}>신부 김효영</div>
                 <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                  <span>우리은행 123456-78-901234</span>
+                  <span>기업은행 469-038025-01-018</span>
                   <button
                     onClick={() => {
-                      navigator.clipboard.writeText("우리은행 123456-78-901234");
+                      navigator.clipboard.writeText("기업은행 469-038025-01-018");
                       alert("계좌번호가 복사되었습니다!");
                     }}
                     style={{
@@ -936,54 +936,7 @@ export default function App() {
                   </button>
                 </div>
               </div>
-              <div style={{ marginBottom: "15px" }}>
-                <div style={{ fontWeight: "600", marginBottom: "5px", textAlign: "center" }}>아버지 김상진</div>
-                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                  <span>하나은행 987654-32-109876</span>
-                  <button
-                    onClick={() => {
-                      navigator.clipboard.writeText("하나은행 987654-32-109876");
-                      alert("계좌번호가 복사되었습니다!");
-                    }}
-                    style={{
-                      background: "none",
-                      border: "1px solid #ddd",
-                      borderRadius: "4px",
-                      padding: "4px 6px",
-                      cursor: "pointer",
-                      fontSize: "10px",
-                      color: "#666"
-                    }}
-                    title="복사하기"
-                  >
-                    복사
-                  </button>
-                </div>
-              </div>
-              <div>
-                <div style={{ fontWeight: "600", marginBottom: "5px", textAlign: "center" }}>어머니 최경선</div>
-                <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-                  <span>기업은행 567890-12-345678</span>
-                  <button
-                    onClick={() => {
-                      navigator.clipboard.writeText("기업은행 567890-12-345678");
-                      alert("계좌번호가 복사되었습니다!");
-                    }}
-                    style={{
-                      background: "none",
-                      border: "1px solid #ddd",
-                      borderRadius: "4px",
-                      padding: "4px 6px",
-                      cursor: "pointer",
-                      fontSize: "10px",
-                      color: "#666"
-                    }}
-                    title="복사하기"
-                  >
-                    복사
-                  </button>
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>
